@@ -11,7 +11,9 @@ pipeline {
 
         stage('clone') {
           steps {
-            sh 'git clone https://github.com/liaozhiwei1/docker_demo.git'
+            sh '''git clone https://github.com/liaozhiwei1/docker_demo.git
+
+rm -rf docker_demo'''
           }
         }
 
