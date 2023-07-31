@@ -1,24 +1,16 @@
 pipeline {
-  agent any
-  stages {
-    stage('clean') {
-      parallel {
-        stage('clean') {
-          steps {
-            sh 'mvn -clean'
-          }
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
         }
-
-        stage('clone') {
-          steps {
-            sh '''rm -rf docker_demo
-git clone https://github.com/liaozhiwei1/docker_demo.git
-'''
-          }
-        }
-
-      }
     }
 
-  }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+    }
 }
