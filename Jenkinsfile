@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        tag= sh(  returnStdout: true, script: 'git rev-parse  HEAD')
+        tag= sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
     }
     stages {
         stage('Build') {
