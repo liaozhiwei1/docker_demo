@@ -1,12 +1,14 @@
 pipeline {
-    agent any
-    environment {
-        tag= sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+    agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
     }
+
     stages {
         stage('Build') {
             steps {
-                echo "${tag}"
                 sh 'mvn -B -DskipTests clean package'
             }
         }
