@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
+        docker any
     }
     environment {
         tag= sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
