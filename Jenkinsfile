@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker any
-    }
+    agent any
     environment {
         tag= sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
     }
