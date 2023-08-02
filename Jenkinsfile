@@ -1,11 +1,14 @@
 pipeline {
     agent any
+    
     stages {
         stage('Build') {
             steps {
+                script {
+                      env.imageTag = sh (script: 'git rev-parse --short HEAD ${GIT_COMMIT}', returnStdout: true).trim()
+                    }
                 // sh 'mvn clean package docker:build'
-                tag = sh 'git rev-parse --short HEAD'
-                echo '${tag}'
+                echo '${imageTag}'
             }
         }
         stage('docker'){
