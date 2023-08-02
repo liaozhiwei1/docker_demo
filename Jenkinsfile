@@ -4,7 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 // sh 'mvn clean package docker:build'
-                sh 'git rev-parse HEAD'
+                tag = sh 'git rev-parse --short HEAD'
+                echo '${tag}'
             }
         }
         stage('docker'){
