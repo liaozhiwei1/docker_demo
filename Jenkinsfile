@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                    echo "${COMMT}"
+                    echo "${env.COMMT}"
                 // sh 'mvn clean package docker:build'
             }
         }
