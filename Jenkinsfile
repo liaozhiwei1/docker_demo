@@ -4,12 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                      env.imageTag = sh (script: 'git rev-parse --short HEAD ${GIT_COMMIT}', returnStdout: true).trim()
-                    }
+                    echo '${GIT_COMMIT}'
                 // sh 'mvn clean package docker:build'
-                
-            }
         }
         stage('docker'){
             steps{
