@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                ehco "${GIT_COMMIT:0:4}"
+                sh '${GIT_COMMIT:0:4}'
                  // sh 'mvn clean package docker:build'
             }
         }
