@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                    echo '${HTTPD}'
+                    sh 'printenv'
                 // sh 'mvn clean package docker:build'
             }
         }
