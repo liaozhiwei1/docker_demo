@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'printenv'
-                    echo "${env.COMMT}"
+                    echo "${GIT_COMMIT}"
                 // sh 'mvn clean package docker:build'
             }
         }
