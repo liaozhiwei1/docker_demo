@@ -1,16 +1,9 @@
 pipeline {
     agent any
-    environment {
-
-
-        COMMT= sh(  returnStdout: true, script: 'git log --oneline -1 | awk \'{print \$1}\'')
-        HTTPD= sh(  returnStdout: true, script: 'git rev-parse --short HEAD')
-
-        }
     stages {
         stage('Build') {
             steps {
-                    sh 'printenv'
+                    echo "${COMMDT}"
                 // sh 'mvn clean package docker:build'
             }
         }
