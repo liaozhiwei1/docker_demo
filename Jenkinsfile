@@ -6,6 +6,7 @@ pipeline {
             steps {
                     echo '${GIT_COMMIT}'
                 // sh 'mvn clean package docker:build'
+            }
         }
         stage('docker'){
             steps{
