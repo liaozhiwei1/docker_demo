@@ -1,15 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2 -v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock'
-        }
+    agent any
+    environment {
+        tag = sh(  returnStdout: true, script: 'git rev-parse --short HEAD')
     }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean package docker:build'
-                sh 'docker images'
+                 sh 'mvn clean package docker:build'
+            }
+        }
+        stage('docker'){
+            steps{
+                sh 'docker login --username=廖智伟123456 registry.cn-hangzhou.aliyuncs.com -p lzw19961229'
+                sh 'docker tag demo:0.0.1-SNAPSHOT registry.cn-hangzhou.aliyuncs.com/lzw_docker/java_lzw:${tag}'
+                sh 'docker push registry.cn-hangzhou.aliyuncs.com/lzw_docker/java_lzw:${tag}'
+                sh 'docker rmi demo:0.0.1-SNAPSHOT'
+                sh 'docker rmi registry.cn-hangzhou.aliyuncs.com/lzw_docker/java_lzw:${tag}'
             }
         }
     }
